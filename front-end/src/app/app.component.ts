@@ -15,7 +15,7 @@ export class AppComponent {
     })
   }
   //process form submission
-  onSubmit(){
+  submit(){
     let data = new FormData();
     data.append('incidentFile',this.formData.get('incidentFile').value);
     
@@ -35,11 +35,12 @@ export class AppComponent {
     //if a file has been provided, assign it to the form group
     if(_event.target.files.length > 0){
       this.formData.get("incidentFile").setValue(_event.target.files[0])
-      
+      this.submit();
     }else{
       this.formData.get("incidentFile").setValue(null);
       
     }
+  
   }
 
 
