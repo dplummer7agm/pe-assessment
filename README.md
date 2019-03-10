@@ -18,17 +18,10 @@ We're assuming that you're using OSX.
 
 ## Running the app ##
 1. After the cloning the repos, navigate to 
-1. Navigate to the back-end
+2. Navigate to the back-end, run ``npm install`` and then run ``nodemon``
+3. Navigate to the front-end, run ``npm install`` and then run ``ng serve``
+4. Open a browser and go to localhost:4200
 
 In total, I've spent about 10 hours on this project. 
 
-
 I did not complete all of the requirements for this project.
-
-
-
-
-
-    * did you complete the project? comment as needed.
-    * how much time did you spend on the project?
-    * Add a couple of screen shots to the repo that show the working version as running on your machine. 
