@@ -18,10 +18,33 @@
 
 
 <agm-map 
-  [latitude]="lat"
-  [longitude]="lng"
+  [latitude]="incidentData.address?.latitude || lat"
+  [longitude]="incidentData.address?.longitude || lng"
   [zoom]="zoom"
   [disableDefaultUI]="false"
   [zoomControl]="false"
   (mapClick)="mapClicked($event)">
+
+  <agm-marker 
+      *ngFor="let m of pins; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      (dragEnd)="markerDragEnd(m, $event)">
+      
+    <agm-info-window>
+      <strong>Incident Details</strong>
+      <p>Date: {{ incidentData.description.event_opened || 'unknown' }}</p>
+      <p *ngIf="incidentData.weather?.list">Weather: (
+        <!-- <br />high : {{incidentData.weather?.list[0]?.main?.temp_max}} -->
+        <!-- <br />low : {{incidentData.weather?.list[0]?.main?.temp_min}} -->
+        <!-- <br />{{ incidentData.weather?.list[0]?.main?.weather[0]?.description || 'unknown' }} -->
+      )</p>
+    </agm-info-window>
+    
+  </agm-marker>
+
+
 </agm-map>
