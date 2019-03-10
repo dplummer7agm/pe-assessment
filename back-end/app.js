@@ -1,5 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
+
+
+//import the express-fileupload library
+var fileUpload = require("express-fileupload");
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -15,6 +20,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//add the express-fileupload library to this express instance
+app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
