@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+/* create the router files to handle the valid incident api endpoint
+and all bad URL requests */
+var incidentRouter = require('./routes/incident');
+var unknownRouter = require('./routes/404');
 
 var app = express();
 
@@ -19,12 +21,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//map the incident router to the root path of this web service
+app.use('/',incidentRouter)
 
-// catch 404 and forward to error handler
+//deal with any unknown URLs
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(unknownRouter(req,res));
 });
 
 // error handler
