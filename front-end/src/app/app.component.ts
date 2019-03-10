@@ -25,12 +25,6 @@ export class AppComponent {
 
 
   pins: any[] = [
-	  {
-		  lat: this.incidentData.address.latitude ||this.lat,
-		  lng: this.incidentData.address.longitude ||this.lng,
-		  label: 'A',
-		  draggable: true
-	  }
   ]
   formData:FormGroup;
 
