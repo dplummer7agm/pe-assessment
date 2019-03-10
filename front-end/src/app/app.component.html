@@ -14,8 +14,14 @@
    
     
 </form>
+</div>
 
-<div class="card-panel">
-  <span>asdafd</span>
-</div>
-</div>
+
+<agm-map 
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
+</agm-map>
