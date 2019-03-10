@@ -1,9 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<form  #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+<form  [formGroup]="formData" (ngSubmit)="onSubmit(formData)">
   <div class="file-field input-field">
     <div class="btn">
       <span>Select Your JSON File</span>
-      <input type="file" name="incidentFile" ngModel accept="application/json">
+      <input type="file" name="incidentFile" (change)="fileChange($event)" accept="application/json" >
     </div>
     <div class="file-path-wrapper">
       <input class="file-path validate" type="text">

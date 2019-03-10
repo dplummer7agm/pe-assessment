@@ -11,20 +11,19 @@ export class IncidentService {
    */
   uploadFile(_formData){
 
-    debugger
+   
     return new Promise((resolve,reject)=>{
 
         //send the form data to the server
        let obs = this.http.post('http://localhost:3000/api/incident/process',_formData)
         .subscribe((_response)=>{
-          debugger
+
           //resolve the promise 
         resolve(_response);
         obs.unsubscribe();
        },(_error)=>{
 
           //reject the promise
-          debugger
          reject(_error);
         obs.unsubscribe();
        },()=>{
@@ -32,8 +31,6 @@ export class IncidentService {
          obs.unsubscribe();
        });
        
-
-      resolve();
     })
   }
 

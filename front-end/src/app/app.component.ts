@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 import { IncidentService } from './incident.service';
 
 @Component({
@@ -8,20 +8,40 @@ import { IncidentService } from './incident.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  constructor( public incidentService: IncidentService){
-
+  public formData:FormGroup;
+  constructor( public formBuilder: FormBuilder, public incidentService: IncidentService){
+    this.formData = this.formBuilder.group({
+      incidentFile : null
+    })
   }
   //process form submission
-  onSubmit(_formData){
-    this.incidentService.uploadFile(_formData.form.value)
+  onSubmit(){
+    let data = new FormData();
+    data.append('incidentFile',this.formData.get('incidentFile').value);
+    
+    
+    this.incidentService.uploadFile(data)
     .then((_response)=>{
-      debugger
+      alert(_response);      
     })
     .catch(ex=>{
       debugger
      
     })
   }
+
+  /** detect when a file has been provided by the user and store it in the formData variable*/
+  fileChange(_event){
+    //if a file has been provided, assign it to the form group
+    if(_event.target.files.length > 0){
+      this.formData.get("incidentFile").setValue(_event.target.files[0])
+      
+    }else{
+      this.formData.get("incidentFile").setValue(null);
+      
+    }
+  }
+
+
 
 }
