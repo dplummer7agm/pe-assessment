@@ -29,7 +29,7 @@ The front-end accepts a CAD file, sends it to the back-end for enrichment, then 
 
 ## did you complete the project? ##
 
-Almost. My solution is capable of receiving a CAD file, enriching it with data from a weather API and a parcel API, and displaying the results on a map in the web browser. I'm able to use the web parcel API you provided to gather information about the location of the incident, but I haven't figured out how to query for locations more specific than states. 
+Almost. My solution is capable of receiving a CAD file, enriching it with data from a weather API and a parcel API, and displaying the results on a map in the web browser. I'm able to use the web parcel API you provided to gather information about the state the incident occurred in, but I haven't figured out how to narrow it down to a more specific geo location. 
 
 
 ## how much time did you spend on the project? ##
