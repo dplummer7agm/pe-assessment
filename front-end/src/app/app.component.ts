@@ -15,7 +15,7 @@ export class AppComponent {
   lng:number = -77.4510597886061;
   
   //set the zoom level for the map
-  zoom:number = 10;
+  zoom:number = 15;
 
   public incidentData:any = {
     address : {},
@@ -102,7 +102,7 @@ export class AppComponent {
     this.pins.push({
 		  lat: this.incidentData.address.latitude ||this.lat,
 		  lng: this.incidentData.address.longitude ||this.lng,
-		  label: 'A',
+		  label: 'Incident '+(this.pins.length+1),
 		  draggable: true
 	  })
   }
