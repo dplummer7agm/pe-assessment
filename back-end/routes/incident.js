@@ -48,7 +48,12 @@ try{ file = req.files['incidentFile'];}catch(ex){}
       // store the weather data in the incident response
       fileJSON.weather = result;
      
-      result = await parcelService.getParcelData({})
+      //get the parcel data for the incident's location
+      result = await parcelService.getParcelData({
+        state : fileJSON.address.state,
+        lon : fileJSON.address.longitude,
+        lat : fileJSON.address.latitude
+      })
 
       if(!result || typeof(result) == "string" )
       return res.json({
