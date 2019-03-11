@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fse = require('fs-extra');
 var weatherService = require("../lib/weatherService");
+var parcelService = require("../lib/parcelService");
 
 //process the incoming incident file
 router.post('/api/incident/process', function (req, res, next) {
@@ -29,21 +30,35 @@ try{ file = req.files['incidentFile'];}catch(ex){}
       //else, extract the JSON data from the file object
       let fileJSON = JSON.parse(file.data.toString("utf8"));
       
-      //get the weathe for this incident's location
+      //get the weather for this incident's location
       let result = await weatherService.getWeatherByCity({
-        city : fileJSON.address.city,
-        state : fileJSON.address.state,
-        //startDate : new Date(fileJSON.description.event_opened).getTime(), API is returning a 404 error
-        //endDate : new Date(fileJSON.description.event_closed).getTime(), API is returning an 404 error
+        lon : fileJSON.address.longitude,
+        lat : fileJSON.address.latitude,
+        startDate : new Date(fileJSON.description.event_opened).toISOString().slice(0,10), //get the start date in YYYY-MM-DD format
+        endDate : new Date(fileJSON.description.event_closed).toISOString().slice(0,10), //get the end date in YYYY-MM-DD format
       });
-
-      fileJSON.weather = result;
-      if(!result)
-      res.json({
+      
+      //if the weather service didn't return a JSON object, then there was an error
+      if(!result || typeof(result) == "string")
+      return res.json({
         success: false,
-        error : "The weather could not be retrieved"
+        error : result || "The weather could not be retrieved."
       })
-      else
+
+      // store the weather data in the incident response
+      fileJSON.weather = result;
+     
+      result = await parcelService.getParcelData({})
+
+      if(!result || typeof(result) == "string" )
+      return res.json({
+        success: false,
+        error : result || "The parcel data could not be fetched."
+      })
+
+      fileJSON.parcel = result;
+
+      //return a success response
       res.json({
         success: true,
         error: false,
@@ -51,11 +66,11 @@ try{ file = req.files['incidentFile'];}catch(ex){}
       })
     }
   } catch (ex) {
-    
+     
     //send an error message back to the client
     res.status(500).json({
       success: false,
-      error: `An unexpected error has occurred: ${ex}`
+      error: `${ex}`
     })
   }
 
