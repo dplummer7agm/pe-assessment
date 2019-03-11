@@ -3,7 +3,7 @@ let http = require("http");
 
 // didn't figure out how to query for parcel data more specific than the incident state
 let apiUrl = 'http://gis.richmondgov.com/ArcGIS/rest/services/StatePlane4502/Ener/MapServer/0/query';
-let queryString = "?f=json";
+
 
 /** get the parcel data for the incident address
  * @param {Object} _params
@@ -14,12 +14,12 @@ let queryString = "?f=json";
 exports.getParcelData = (_params)=>{
     
     //build the query string
-    queryString += `&text=${stateCodes[_params.state]}`
+    let queryString = `?f=json&text=${stateCodes[_params.state]}`
     
   
     return new Promise((res,rej)=>{
         let url = `${apiUrl}${queryString}`;
-        
+        console.log(url);
 
         //fetch data from the parcel api
         http.get(url,(resp)=>{
