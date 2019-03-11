@@ -46,16 +46,22 @@ export class AppComponent {
     //upload the form data
     this.incidentService.uploadFile(data)
     .then((_response:any)=>{
-
+     
+      //update the incident data asynchronously and force a UI refresh for any data bound elements
       this.ngZone.run(()=>{
       //store the incident data in a local variable
       this.incidentData = _response.response;
-      this.refreshPins();
+      if(_response.error)
+        alert(_response.error)
+      else
+        this.refreshPins();
       })
       
     })
     .catch(ex=>{
-      debugger
+
+      //display an error message
+      alert(ex.error.error)
      
     })
   }
