@@ -18,10 +18,28 @@ We're assuming that you're using OSX.
 
 ## Running the app ##
 1. After the cloning the repos, navigate to 
-2. Navigate to the back-end, run ``npm install`` and then run ``nodemon``
+2. Navigate to the back-end, run ``npm install`` and then run ``npm start``
 3. Navigate to the front-end, run ``npm install`` and then run ``ng serve``
-4. Open a browser and go to localhost:4200
+4. Open a browser and go to localhost:4200.
 
-In total, I've spent about 10 hours on this project. 
+## How it works ##
 
-I did not complete all of the requirements for this project.
+The front-end accepts a CAD file, sends it to the back-end for enrichment, then takes the response and displays it in the marker annotation on the map.
+
+
+## did you complete the project? ##
+
+Almost. My solution is capable of receiving a CAD file, enriching it with data from a weather API and a parcel API, and displaying the results on a map in the web browser. I'm able to use the web parcel API you provided to gather information about the location of the incident, but I haven't figured out how to query for locations more specific than states. 
+
+
+## how much time did you spend on the project? ##
+
+I've spent about 14 hours on this project.
+2 hours troubleshooting node environment issues on my computer (resolved)
+1 hours stroubleshooting why Google Maps won't display on node
+11 hours on development
+
+
+## Add a couple of screen shots to the repo that show the working version as running on your machine. ##
+
+The screenshots are located in the project's root.
