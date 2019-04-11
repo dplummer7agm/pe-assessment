@@ -52,7 +52,8 @@ try{ file = req.files['incidentFile'];}catch(ex){}
       result = await parcelService.getParcelData({
         state : fileJSON.address.state,
         lon : fileJSON.address.longitude,
-        lat : fileJSON.address.latitude
+        lat : fileJSON.address.latitude,
+        time : new Date(fileJSON.description.event_opened).getTime()
       })
 
       if(!result || typeof(result) == "string" )
