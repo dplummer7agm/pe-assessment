@@ -13,10 +13,10 @@ let apiUrl = 'http://gis.richmondgov.com/ArcGIS/rest/services/StatePlane4502/Ene
 */
 exports.getParcelData = (_params)=>{
     
+
     //build the query string
-    let queryString = `?f=json&text=${stateCodes[_params.state]}`
-    
-  
+    let queryString = `?f=json&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&geometry=${_params.lon},${_params.lat}`
+ 
     return new Promise((res,rej)=>{
         let url = `${apiUrl}${queryString}`;
         console.log(url);

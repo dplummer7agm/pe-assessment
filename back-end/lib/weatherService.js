@@ -9,13 +9,12 @@ let tempUnit = 'I'; //specifies the type of temperature that'll be returned (I =
  * @param {String} _params.lon
  * @param {String} _params.lat
  * @param {String} _params.startDate
- * @param {String} _params.startDate
+ * @param {String} _params.endDate
 */
 exports.getWeatherByCity = (_params)=>{
 
     formatDates(_params);
     
-
 
     return new Promise((res,rej)=>{
         let url = `${apiUrl}?start_date=${_params.startDate}&end_date=${_params.endDate}&lon=${_params.lon}&lat=${_params.lat}&units=${tempUnit}&key=${apiKey}`;
